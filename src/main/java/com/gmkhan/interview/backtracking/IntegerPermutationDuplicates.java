@@ -2,16 +2,14 @@ package com.gmkhan.interview.backtracking;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class IntegerPermutationDuplicates {
 
 	@Test
 	public void run(){
-		int[] arr = {1,2,2};
+		int[] arr = {1,1,2};
 		List<List<Integer>> answer = permute(arr);
 		System.out.println(answer);
 	}
@@ -23,15 +21,15 @@ public class IntegerPermutationDuplicates {
 	}
 
 	private void permuteUtil(int[] arr, int n,int index,List<List<Integer>> result){
-		boolean[] visited = new boolean[11];
+		Map<Integer,Boolean> visited = new HashMap<>();
 		if(index==n){
 			List<Integer> temp = Arrays.stream(arr).boxed().collect(Collectors.toList());
 			result.add(temp);
 			return;
 		}
 		for(int i=index; i<n; i++){
-			if(!visited[arr[i]]){
-				visited[arr[i]] = true;
+			if(!visited.containsKey(arr[i])){
+				visited.put(arr[i],true);
 				arr = swap(arr,index,i);
 				permuteUtil(arr,n,index+1,result);
 				arr = swap(arr,i,index);

@@ -16,6 +16,7 @@ public class IntegerPermutationLexicographically{
 	private void permuteLexicographically(int[] arr, int n, int index){
 		if(index==n){
 			printArray(arr);
+			return;
 		}
 		for(int i=index; i<n; i++){
 			leftShift(index,i,arr);
